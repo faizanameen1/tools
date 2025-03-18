@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PDF Merger Tool - Merge your PDF files easily and optimize image compression">
+  <meta name="keywords" content="PDF Merger, Compress PDF, PDF Compression, PDF Tool, Merge PDFs">
+  <meta name="author" content="Your Name">
+  <title>PDF Merger Tool | Merge and Optimize PDFs</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <!-- Internal CSS for styling -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #4CAF50;
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .pdf-merger {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 40px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .ads-space {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    footer p {
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>PDF Merger Tool</h1>
+      <p>Merge and optimize your PDF files effortlessly</p>
+    </div>
+  </header>
+
+  <section class="container">
+    <!-- PDF Merger Section -->
+    <div class="pdf-merger">
+      <h2>Upload PDF Files to Merge</h2>
+      <input type="file" id="pdf-upload" accept=".pdf" multiple />
+      <button onclick="mergePDF()">Merge PDFs</button>
+      
+      <h3>Compression Level</h3>
+      <input type="range" id="compression-level" min="1" max="10" step="1" value="5" />
+      <label for="compression-level">Compression Level: <span id="compression-value">5</span></label>
+      <br><br>
+
+      <button onclick="downloadMergedPDF()" style="display:none;" id="download-btn">Download Merged PDF</button>
+    </div>
+    
+    <!-- Placeholder for Google Ads -->
+    <div class="ads-space">
+      <div id="google-adsense"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 PDF Merger Tool. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for functionality -->
+  <script>
+    // Update compression level value dynamically
+    document.getElementById('compression-level').addEventListener('input', function () {
+      document.getElementById('compression-value').textContent = this.value;
+    });
+
+    // PDF Merger functionality
+    function mergePDF() {
+      const fileInput = document.getElementById('pdf-upload');
+      if (fileInput.files.length < 2) {
+        alert('Please upload at least two PDF files to merge.');
+        return;
+      }
+
+      const compressionLevel = document.getElementById('compression-level').value;
+      const files = fileInput.files;
+      // Placeholder for actual PDF merging logic
+      alert(`Merging PDFs with compression level: ${compressionLevel}`);
+      
+      // Simulate a merged PDF download link
+      document.getElementById('download-btn').style.display = 'inline-block';
+      document.getElementById('download-btn').href = "#"; // Add actual merged PDF URL here
+    }
+
+    // Google Ads integration (AdSense)
+    function loadAds() {
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "YOUR-AD-CLIENT-ID",
+        enable_page_level_ads: true
+      });
+    }
+
+    window.onload = loadAds;
+
+    // Placeholder function to simulate downloading merged PDF
+    function downloadMergedPDF() {
+      alert("Download the merged PDF (this is a placeholder).");
+    }
+  </script>
+
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "YOUR-AD-CLIENT-ID",
+      enable_page_level_ads: true
+    });
+  </script>
+
+</body>
+</html>
