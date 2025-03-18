@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert images to PDF online with adjustable compression. Supports JPG, PNG, WEBP formats. Free online image to PDF converter with SEO optimization.">
+    <meta name="keywords" content="image to pdf, convert image to pdf, jpg to pdf, png to pdf, online pdf converter">
+    <title>Image2PDF Pro - Convert Images to PDF Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --background-color: #f8fafc;
+            --text-color: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        .upload-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .drop-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--primary-color);
+            background: #f1f5f9;
+        }
+
+        .settings-panel {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .preview-section {
+            margin-top: 2rem;
+        }
+
+        .ad-unit {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ad-unit {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Image2PDF Pro</h1>
+            <p>Convert multiple images to PDF with adjustable compression</p>
+        </div>
+    </header>
+
+    <!-- Ad Banner -->
+    <div class="container">
+        <div id="ad-banner" class="ad-unit">
+            <!-- Google AdSense Code -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                data-ad-slot="XXXXXXXXXX"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="main-grid">
+            <div class="main-content">
+                <section class="upload-section">
+                    <div class="drop-zone" id="dropZone">
+                        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+                        <p>Drag & drop images here or click to upload</p>
+                        <p class="text-sm text-gray-500">Supported formats: JPG, PNG, WEBP</p>
+                    </div>
+                    
+                    <div class="settings-panel">
+                        <h3>Conversion Settings</h3>
+                        <div class="form-group">
+                            <label>Compression Level</label>
+                            <input type="range" id="compression" min="0" max="1" step="0.1" value="0.8">
+                            <span id="compressionValue">80%</span>
+                        </div>
+                        <button id="convertBtn" class="btn-primary">Convert to PDF</button>
+                    </div>
+
+                    <div class="preview-section">
+                        <h4>Selected Files</h4>
+                        <div id="filePreview"></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sidebar Ads -->
+            <aside class="sidebar">
+                <div id="ad-sidebar" class="ad-unit">
+                    <!-- Google AdSense Code -->
+                    <ins class="adsbygoogle"
+                        style="display:block"
+                        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                        data-ad-slot="XXXXXXXXXX"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"></ins>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/browser-image-compression/2.0.2/browser-image-compression.min.js"></script>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const convertBtn = document.getElementById('convertBtn');
+        const compressionSlider = document.getElementById('compression');
+        const compressionValue = document.getElementById('compressionValue');
+
+        let files = [];
+
+        // Drag & Drop Handlers
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('drag-over');
+        });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-over');
+            files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        // File Input Handler
+        fileInput.addEventListener('change', (e) => {
+            files = e.target.files;
+            handleFiles(files);
+        });
+
+        // Compression Level Display
+        compressionSlider.addEventListener('input', (e) => {
+            compressionValue.textContent = `${Math.round(e.target.value * 100)}%`;
+        });
+
+        // Conversion Handler
+        convertBtn.addEventListener('click', async () => {
+            if (!files.length) return alert('Please select images first');
+            
+            const compression = parseFloat(compressionSlider.value);
+            const pdfDoc = await PDFLib.PDFDocument.create();
+            
+            try {
+                for (const file of files) {
+                    const compressedFile = await imageCompression(file, {
+                        maxSizeMB: 1,
+                        useWebWorker: true,
+                        initialQuality: compression
+                    });
+                    
+                    const image = await pdfDoc.embedJpg(await compressedFile.arrayBuffer());
+                    const page = pdfDoc.addPage();
+                    page.setSize(image.width, image.height);
+                    page.drawImage(image);
+                }
+
+                const pdfBytes = await pdfDoc.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `converted-${Date.now()}.pdf`;
+                link.click();
+            } catch (error) {
+                console.error('Conversion error:', error);
+                alert('Error converting files. Please try again.');
+            }
+        });
+
+        function handleFiles(files) {
+            const preview = document.getElementById('filePreview');
+            preview.innerHTML = Array.from(files)
+                .map(file => `<div class="file-item">${file.name} (${formatBytes(file.size)})</div>`)
+                .join('');
+        }
+
+        function formatBytes(bytes) {
+            const units = ['B', 'KB', 'MB', 'GB'];
+            let i = 0;
+            while (bytes >= 1024 && i < units.length - 1) {
+                bytes /= 1024;
+                i++;
+            }
+            return `${bytes.toFixed(2)} ${units[i]}`;
+        }
+
+        // Initialize AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
