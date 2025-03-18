@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Protect and compress your PDF files online with our advanced PDF Protector tool. Optimize images and secure your documents with ease.">
+    <meta name="keywords" content="PDF Protector, PDF Compressor, PDF Security, Optimize PDF, PDF Tool">
+    <meta name="author" content="Your Company Name">
+    <title>PDF Protector - Secure and Compress PDF Files Online</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_UNIT_ID" crossorigin="anonymous"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f4f9, #e0e0f5);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.1rem;
+        }
+
+        main {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            margin: 20px 0;
+        }
+
+        section {
+            margin-bottom: 25px;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+
+        input[type="file"], input[type="password"], select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="file"]:focus, input[type="password"]:focus, select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .ad-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #333;
+            color: white;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Icons */
+        .icon {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-file-pdf icon"></i>PDF Protector</h1>
+        <p>Secure and compress your PDF files with ease.</p>
+    </header>
+
+    <main>
+        <!-- File Upload Section -->
+        <section id="upload-section">
+            <h2><i class="fas fa-upload icon"></i>Upload Your PDF</h2>
+            <input type="file" id="pdf-upload" accept="application/pdf">
+        </section>
+
+        <!-- Compression Level Selection -->
+        <section id="compression-section">
+            <h2><i class="fas fa-compress icon"></i>Select Compression Level</h2>
+            <select id="compression-level">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </section>
+
+        <!-- Password Protection -->
+        <section id="password-section">
+            <h2><i class="fas fa-lock icon"></i>Set Password</h2>
+            <input type="password" id="pdf-password" placeholder="Enter password">
+        </section>
+
+        <!-- Optimize Images Checkbox -->
+        <section id="optimize-section">
+            <label>
+                <input type="checkbox" id="optimize-images"> <i class="fas fa-image icon"></i>Optimize Images
+            </label>
+        </section>
+
+        <!-- Process Button -->
+        <button id="process-btn">
+            <i class="fas fa-shield-alt icon"></i>Protect and Compress PDF
+        </button>
+
+        <!-- Loading Spinner -->
+        <div class="spinner" id="spinner"></div>
+
+        <!-- AdSense Ad Unit -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_AD_UNIT_ID"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 PDF Protector. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript Functionality
+        document.getElementById('process-btn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('pdf-upload');
+            const compressionLevel = document.getElementById('compression-level').value;
+            const password = document.getElementById('pdf-password').value;
+            const optimizeImages = document.getElementById('optimize-images').checked;
+            const spinner = document.getElementById('spinner');
+
+            if (!fileInput.files[0]) {
+                alert('Please upload a PDF file.');
+                return;
+            }
+
+            // Show spinner
+            spinner.style.display = 'block';
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('compressionLevel', compressionLevel);
+            formData.append('password', password);
+            formData.append('optimizeImages', optimizeImages);
+
+            try {
+                const response = await fetch('/process-pdf', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'protected.pdf';
+                    a.click();
+                } else {
+                    alert('Error processing PDF.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while processing the PDF.');
+            } finally {
+                // Hide spinner
+                spinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
